@@ -9,7 +9,8 @@ ClinVar$New_PhyloP <- ClinVar$PhyloP
 ClinVar$New_PhyloP[ClinVar$New_PhyloP < -10] <- -10
 
 
-CADD <- read.csv("Variants_WithCADDGr20_ok.bed", sep="\t", header = T)
+CADD <- read.csv("Variants_WithCADDGr20_WithHeader.bed", sep="\t", header = T)   ####We have to add a header to the Variants_WithCADDGr20.bed file (already generated) --> "chr\tstart\tend\tPhyloP\tgene_name\tClass\tOrigin"
+    
 #####Create new phyloP for collapsing data < -10
 CADD$New_PhyloP <- CADD$PhyloP
 CADD$New_PhyloP[CADD$New_PhyloP < -10] <- -10
