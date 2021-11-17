@@ -64,7 +64,7 @@ awk '$4 == "AF>=0.005" {print}' TopMed_Vars_ALLChromosomes_IntersectedWith_PC_no
 cat TopMed_Vars_ALLChromosomes_PC_cds_Category_AC1_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AC1_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_cds_Category_AC2_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AC2_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_cds_Category_AC3-5_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AC3-5_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_cds_Category_AC6-10_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AC6-10_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_cds_Category_AC11AF0005_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AC11AF0005_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_cds_Category_AF0005_MedianPhyloP TopMed_Vars_ALLChromosomes_PC_non_coding_Category_AF0005_MedianPhyloP > TopMed_Vars_ALLChromosomes_PC_ANNOTATION_FILE_MEDIANS_minimal
 
 ####create a file with phyloP scores and AC/AF classes amenable for plotting (essential info)
-awk -v OFS="\t" '{print $3,$4}' TopMed_Vars_ALLChromosomes_WithCategories_4Plot_4Paper | sed 's/AC=1/a/g' | sed 's/AC=2/b/g' | sed 's/AC3-5/c/g' | sed 's/AC6-10/d/g' | sed 's/AC>=11AF<0.005/e/g' | sed 's/AF>=0.005/f/g' > TopMed_Vars_ALLChromosomes_WithCategories_4Plot_4Paper_minimal
+awk -v OFS="\t" '{print $3,$4}' TopMed_Vars_ALLChromosomes_WithCategories_4Plot_4Paper | sed 's/AC=1/a/g' | sed 's/AC=2/b/g' | sed 's/AC3-5/c/g' | sed 's/AC6-10/d/g' | sed 's/AC>=11AF<0\.005/e/g' | sed 's/AF>=0\.005/f/g' > TopMed_Vars_ALLChromosomes_WithCategories_4Plot_4Paper_minimal
 
 R --vanilla <<EOF
 
