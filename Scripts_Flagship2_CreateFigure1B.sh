@@ -79,7 +79,7 @@ data <- data[complete.cases(data), ]
 anno <- read.csv("TopMed_Vars_ALLChromosomes_PC_ANNOTATION_FILE_MEDIANS_minimal", head=F, sep="\t")
 anno\$V1 <- factor(anno\$V1, levels=c("a","b","c","d","e","f"))
 
-pdf("Figure_BiggerFontSize.pdf")
+pdf("Figure_1B_BiggerFontSize.pdf")
 ggplot(data = data, aes(x=V2, y=V1)) +
   geom_boxplot(outlier.shape = NA, color="grey", fill="grey", alpha=0.4) + coord_cartesian(ylim=c(-3,4)) +
   ylab("phyloP score") +
