@@ -16,7 +16,7 @@ cd $WorkFolder
 ######All PhyloP >= 2.27 only##########
 awk -v var="${n}" -v FS="\t" -v OFS="\t" 'FNR == 1 {next} $3 >= 2.27 && $4 < var {print $1,$2-1,$2,$3,$4}' $InFolder/MERGED_PHYLOP_CADD_ALL_CHROMOSOMES.txt > $WorkFolder/Variants_WithPhyloPFDR05_CADDLw${n}.bed &&
 
-######All CADD >= 10-20##########
+######All CADD >= 10-20 only##########
 awk -v var="${n}" -v FS="\t" -v OFS="\t" 'FNR == 1 {next} $4 >= var && $3 < 2.27 {print $1,$2-1,$2,$3,$4}' $InFolder/MERGED_PHYLOP_CADD_ALL_CHROMOSOMES.txt > $WorkFolder/Variants_WithCADDGr${n}_WithPhyloPLwFDR05.bed &&
 
 ######All PhyloP >= 2.27 and CADD >=10-20##########
@@ -128,7 +128,7 @@ done<$AnnoFolder/List_ALL_Genomic_Categories.list    #####list of annotation cat
 
 
 
-#####Plot FigureS5_C#######
+#####Plot FigureS5_1_C#######
 ####Create a dataframe with number of variants for only phyloP, only CADD and PhyloP-CADD####
 cd $WorkFolder
 
@@ -161,7 +161,7 @@ library("dplyr")
 library("ggplot2")
 
 data <- read.csv("$OutFolder/Table_NrVariants_UNIQUE.txt", head=T, sep="\t")
-pdf("$OutFolder/Figure5S-C.pdf")
+pdf("$OutFolder/FigureS5_1-C.pdf")
 data$Category <- factor(data$Category, levels = c("Only CADD score variant positions","PhyloP constrained and CADD score variant positions","Only PhyloP constrained variant positions"))
 ggplot(data, aes(x=Cutoff, y=Variants, fill=Category)) +
   geom_bar(stat="identity") +
@@ -197,7 +197,7 @@ data <- do.call(rbind, lapply(file_list, read.csv, header = T, sep="\t"))
 
 data$Proportion_PerCent <- data$Proportion * 100
 data$Category <- factor(data$Category, levels = c("Only CADD score variant positions","PhyloP constrained and CADD score variant positions","Only PhyloP constrained variant positions"))
-pdf("$OutFolder/Figure_S5-D.pdf", width = 15 , height = 15)
+pdf("$OutFolder/Figure_S5_1-D.pdf", width = 15 , height = 15)
 ggplot(data, aes(x=Value, y=Proportion_PerCent)) + geom_point(aes(color=Category)) + geom_line(aes(color=Category)) +
   ylab("Percentage of category in annotation (%)") +
   xlab("CADD score threshold") +
