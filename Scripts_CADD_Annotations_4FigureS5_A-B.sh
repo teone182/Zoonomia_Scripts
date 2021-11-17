@@ -117,7 +117,7 @@ R --vanilla <<EOF
 library("dplyr")
 library("ggplot2")
 
-data <- read.csv("Table_NrVariants_TOTAL.txt", head=T, sep="\t")
+data <- read.csv("$OutFolder/Table_NrVariants_TOTAL.txt", head=T, sep="\t")
 head(data)
 pdf("$OutFolder/Figure5S-A.pdf")
 ggplot(data, aes(x=Cutoff, y=Variants, fill=Category)) +
