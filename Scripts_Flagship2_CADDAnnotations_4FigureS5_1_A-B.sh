@@ -90,7 +90,7 @@ cat Fraction_*_${class}.txt | sed "1iAnnotation\tProportion\tMeasure\tValue\tCat
 done<$AnnoFolder/List_ALL_Genomic_Categories.list #####list of annotation categories (e.g pc_pickOne_cds, pc_pickAll_intron, etc.#####
 
 
-#####Plot FigureS5_A#######
+#####Plot FigureS5_1_A#######
 ####Create a dataframe with number of variants for phyloP constraint and every CADD class####
 cd $WorkFolder
 
@@ -119,7 +119,7 @@ library("ggplot2")
 
 data <- read.csv("$OutFolder/Table_NrVariants_TOTAL.txt", head=T, sep="\t")
 head(data)
-pdf("$OutFolder/Figure5S-A.pdf")
+pdf("$OutFolder/FigureS5_1-A.pdf")
 ggplot(data, aes(x=Cutoff, y=Variants, fill=Category)) +
   geom_bar(stat="identity") +
   scale_x_continuous(breaks = seq(10, 20, by = 1), labels=c("10" = expression("">="10"), "11" = expression("" >="11"), "12" = expression("" >="12"), "13" = expression("" >="13"), "14" = expression("" >="14"), "15" = expression("" >="15"),
@@ -134,7 +134,7 @@ EOF
 
 
 #################
-######Merge the genomic annotation of interest and then plot (FigureS5_B)###########
+######Merge the genomic annotation of interest and then plot (FigureS5_1_B)###########
 
 R --vanilla <<EOF
 library("dplyr")
@@ -150,7 +150,7 @@ data <- do.call(rbind, lapply(file_list, read.csv, header = T, sep="\t"))
 
 data$Proportion_PerCent <- data$Proportion * 100
 
-pdf("$OutFolder/Figure_S5-B.pdf", width = 15 , height = 15)
+pdf("$OutFolder/Figure_S5_1-B.pdf", width = 15 , height = 15)
 ggplot(data, aes(x=Value, y=Proportion_PerCent)) + geom_point(aes(color=Category)) + geom_line(aes(color=Category)) +
   ylab("Percentage of category in annotation (%)") +
   xlab("CADD score threshold") +
