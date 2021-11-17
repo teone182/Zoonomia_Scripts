@@ -38,7 +38,7 @@ do
 zcat gnomad.genomes.r3.0.snv.tsv.gz | awk -v var="$i" '$1 == var {print}' | sed 's/^/chr/g' | awk -v OFS="\t" '{print $1,$2,$6}' > gnomad_chr${i}_ToGrepWithin
 zcat gnomad.genomes.r3.0.snv.tsv.gz | awk -v var="$i" '$1 == var {print}' | sed 's/^/chr/g' | awk -v OFS="\t" '{print $1,$2}' | uniq -u > gnomad_chr${i}_ToGrepFor
 grep -wFf gnomad_chr${i}_ToGrepFor gnomad_chr${i}_ToGrepWithin | sed 's/$/\tNA/g' > gnomad_chr${i}_OnlyUniqueVarsBiallelic &&
-rm gnomad_chr${i}_ToGrepWithin gnomad_chr${i}_ToGrepWithin
+rm gnomad_chr${i}_ToGrepFor gnomad_chr${i}_ToGrepWithin
 done<Chromosome_list   ####Chromosome_list is the list of chromosomes
 
 ####Extract those multiallelic variants and get the mean and SD of the CADD score#######
