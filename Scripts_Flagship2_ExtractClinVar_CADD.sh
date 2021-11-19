@@ -6,19 +6,19 @@
 
 ####After downloading the ClinVar master summary file (clinvar_variant_summary.txt.gz), extract those variants of interest#######
 ########Pathogenic#####
-zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Pathogenic$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") {print}' > PathogenicOnly
+zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Pathogenic$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") || $17 == "Assembly" {print}' > PathogenicOnly
 awk -v FS="\t" -v OFS="\t" 'NR>1 {print $19,$20-1,$21,$5,$7,$16}' PathogenicOnly | sed 's/^/chr/g' | sort -k1,1 -k2,2n | uniq | sed 's/, /_/g' | sed 's/ /_/g' > PathogenicOnly_4Intersect
 
 ########Likely pathogenic#####
-zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Likely pathogenic$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") {print}' > LikelyPathogenicOnly
+zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Likely pathogenic$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") || $17 == "Assembly" {print}' > LikelyPathogenicOnly
 awk -v FS="\t" -v OFS="\t" 'NR>1 {print $19,$20-1,$21,$5,$7,$16}' LikelyPathogenicOnly | sed 's/^/chr/g' | sort -k1,1 -k2,2n | uniq | sed 's/, /_/g' | sed 's/ /_/g' > LikelyPathogenicOnly_4Intersect
 
 ########Benign#####
-zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Benign$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") {print}' > BenignOnly
+zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Benign$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") || $17 == "Assembly" {print}' > BenignOnly
 awk -v FS="\t" -v OFS="\t" 'NR>1 {print $19,$20-1,$21,$5,$7,$16}' BenignOnly | sed 's/^/chr/g' | sort -k1,1 -k2,2n | uniq | sed 's/, /_/g' | sed 's/ /_/g' > BenignOnly_4Intersect
 
 ########Likely benign#####
-zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Likely benign$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") {print}' > LikelyBenignOnly
+zcat clinvar_variant_summary.txt.gz | awk -v FS="\t" '($7 ~ /^Likely benign$/ && $17 == "GRCh38" && $2 == "single nucleotide variant") || $17 == "Assembly" {print}' > LikelyBenignOnly
 awk -v FS="\t" -v OFS="\t" 'NR>1 {print $19,$20-1,$21,$5,$7,$16}' LikelyBenignOnly | sed 's/^/chr/g' | sort -k1,1 -k2,2n | uniq | sed 's/, /_/g' | sed 's/ /_/g' > LikelyBenignOnly_4Intersect
 
 #####concatenate all the classes######
